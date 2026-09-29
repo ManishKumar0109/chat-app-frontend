@@ -8,7 +8,6 @@ const Chat = () => {
   return (
     <div className="flex h-screen w-screen">
       <ContactsContainer
-        className={selectedChatData ? "hidden md:flex" : "flex"}
       />
 
       {!selectedChatData ? <EmptyChatContainer /> : <ChatContainer />}

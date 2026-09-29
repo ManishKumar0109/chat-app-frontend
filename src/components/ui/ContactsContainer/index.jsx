@@ -1,10 +1,10 @@
 import { NewDm } from "./components/NewDm";
 
-import {  LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { useStore } from "../../../../store/index";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { GET_CONTACTS ,GET_CHANNELS} from "@/utils/constants";
+import { GET_CONTACTS, GET_CHANNELS } from "@/utils/constants";
 import { api } from "@/lib/api-client";
 import { HOST } from "@/utils/constants";
 import ContactList from "./components/ContactList";
@@ -12,7 +12,7 @@ import NewChannel from "./components/NewChannel";
 import ChannelList from "./components/ChannelList";
 
 const ContactsContainer = () => {
-  const { userInfo, setContacts, setChannels } = useStore();
+  const { userInfo, setContacts, setChannels, selectedChatData } = useStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const ContactsContainer = () => {
       } catch (err) {
         console.log(err.message);
       }
-    };   
+    };
 
     const getChannels = async () => {
       try {
@@ -51,7 +51,11 @@ const ContactsContainer = () => {
   };
 
   return (
-    <div className="flex flex-col w-full sm:w-[40%] md:w-[35%] lg:w-[25%] h-full bg-gray-900 shadow-lg px-5 py-4">
+    <div
+      className={`${
+        selectedChatData ? "hidden md:flex" : "flex"
+      } flex-col w-full sm:w-[40%] md:w-[35%] lg:w-[25%] h-full bg-gray-900 shadow-lg px-5 py-4`}
+    >
       <div className="flex">
         <Logo />
       </div>
@@ -128,7 +132,7 @@ const Logo = () => {
       {/* LOGO */}
       <div className="relative">
         {/* Glow */}
-        
+
         <svg
           id="logo-38"
           width="82"
@@ -138,18 +142,9 @@ const Logo = () => {
           xmlns="http://www.w3.org/2000/svg"
           className="relative drop-shadow-[0_0_12px_rgba(168,85,247,0.45)] transition-transform duration-300 group-hover:scale-105"
         >
-          <path
-            d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z"
-            fill="#8338ec"
-          />
-          <path
-            d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z"
-            fill="#975aed"
-          />
-          <path
-            d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z"
-            fill="#b388ff"
-          />
+          <path d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z" fill="#8338ec" />
+          <path d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z" fill="#975aed" />
+          <path d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z" fill="#b388ff" />
         </svg>
       </div>
 
