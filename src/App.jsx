@@ -21,7 +21,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <Protected />,
     loader: rootLoader, // function that will run before fucntion loads
-    errorElement: <NotFound/>,
     children: [
       {
         index: true,
