@@ -7,18 +7,11 @@ const Chat = () => {
 
   return (
     <div className="flex h-screen w-screen">
-      
-      {/* Desktop: always visible
-          Mobile/tablet: visible only when no chat is selected */}
-      <div className={`${selectedChatData ? "hidden md:flex" : "flex"} md:w-87.5`}>
+      <div className={selectedChatData ? "hidden md:block" : "block"}>
         <ContactsContainer />
       </div>
 
-      {/* Chat */}
-      <div className={`${selectedChatData ? "flex" : "hidden md:flex"} flex-1`}>
-        {!selectedChatData ? <EmptyChatContainer /> : <ChatContainer />}
-      </div>
-
+      {!selectedChatData ? <EmptyChatContainer /> : <ChatContainer />}
     </div>
   );
 };
