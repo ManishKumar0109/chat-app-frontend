@@ -99,141 +99,223 @@ const Auth = () => {
     }
   };
 
+
   return (
-    <div className=" h-screen w-screen flex items-center">
-      <div className=" shadow-sm shadow-black   rounded-2xl  mx-auto  w-[90%] lg:px-[1%] px-[4%] h-auto py-4 lg:w-1/4 flex flex-col gap-10">
-        {Login ? (
-          <form onSubmit={handlelogin}>
-            <div className="w-full flex flex-col gap-7">
-              <Field data-invalid={showError.email && errors.email}>
-                <Input
-                  placeholder={"Enter email-id"}
-                  type={"email"}
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setShowError((obj) => ({ ...obj, email: false }));
-                  }}
-                  required
-                />
-                {showError.email && errors.email == true && (
-                  <FieldError className={"ms-2"}>
-                    Enter a valid email address.
-                  </FieldError>
-                )}
-              </Field>
+  <div className="min-h-screen w-screen flex items-center justify-center px-4 py-8
+    bg-linear-to-br from-[#020617] via-[#0f172a] to-[#172554]">
 
-              <Field data-invalid={showError.password && errors.password}>
-                <Input
-                  placeholder={"Enter password"}
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setShowError((obj) => ({ ...obj, password: false }));
-                  }}
-                  type={"password"}
-                  required
-                />
-                {showError.password && errors.password && (
-                  <FieldError className={"ms-2"}>
-                    Enter a valid strong password.
-                  </FieldError>
-                )}
-              </Field>
+    <div className="relative overflow-hidden border border-white/10
+      bg-white/6 backdrop-blur-2xl shadow-2xl shadow-black/30
+      rounded-3xl mx-auto w-full max-w-md lg:w-1/4
+      px-6 sm:px-8 py-8 flex flex-col gap-8">
 
-              <Button className={"w-1/2 mx-auto mt-4"} type={"submit"}>
-                Log in
-              </Button>
-            </div>
-          </form>
-        ) : (
-          <form className="h-4/5" onSubmit={handlesignup}>
-            <div className="w-full min-h-1/3 flex flex-col gap-3  ">
-              <Field className={" h-full  "}>
-                <FieldLabel
-                  htmlFor="input-profile-photo"
-                  className={"h-full  "}
-                >
+      {/* Decorative glow */}
+      <div className="absolute -top-20 -right-20 h-48 w-48
+        rounded-full bg-blue-500/20 blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 text-center">
+        <h1 className="text-3xl font-bold tracking-tight text-white">
+          {Login ? "Welcome Back" : "Create Account"}
+        </h1>
+        <p className="mt-2 text-sm text-slate-400">
+          {Login
+            ? "Sign in to continue your journey."
+            : "Join us and get started today."}
+        </p>
+      </div>
+
+      {Login ? (
+        <form onSubmit={handlelogin} className="relative z-10">
+          <div className="w-full flex flex-col gap-5">
+
+            <Field data-invalid={showError.email && errors.email}>
+              <Input
+                placeholder={"Enter email-id"}
+                type={"email"}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setShowError((obj) => ({ ...obj, email: false }));
+                }}
+                required
+                className="h-12 rounded-xl border border-white/10
+                  bg-slate-950/40 px-4 text-white placeholder:text-slate-500
+                  focus-visible:ring-2 focus-visible:ring-blue-500/70
+                  focus-visible:border-blue-500/50 transition-all"
+              />
+              {showError.email && errors.email == true && (
+                <FieldError className={"ms-2"}>
+                  Enter a valid email address.
+                </FieldError>
+              )}
+            </Field>
+
+            <Field data-invalid={showError.password && errors.password}>
+              <Input
+                placeholder={"Enter password"}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setShowError((obj) => ({ ...obj, password: false }));
+                }}
+                type={"password"}
+                required
+                className="h-12 rounded-xl border border-white/10
+                  bg-slate-950/40 px-4 text-white placeholder:text-slate-500
+                  focus-visible:ring-2 focus-visible:ring-blue-500/70
+                  focus-visible:border-blue-500/50 transition-all"
+              />
+              {showError.password && errors.password && (
+                <FieldError className={"ms-2"}>
+                  Enter a valid strong password.
+                </FieldError>
+              )}
+            </Field>
+
+            <Button
+              className="w-full h-12 mt-2 rounded-xl font-semibold text-white
+                bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/20
+                hover:shadow-blue-500/30 hover:-translate-y-0.5
+                transition-all duration-200"
+              type={"submit"}
+            >
+              Log in
+            </Button>
+          </div>
+        </form>
+      ) : (
+        <form className="relative z-10" onSubmit={handlesignup}>
+          <div className="w-full flex flex-col gap-4">
+
+            <Field className={"flex items-center justify-center"}>
+              <FieldLabel
+                htmlFor="input-profile-photo"
+                className="group cursor-pointer"
+              >
+                <div className="relative p-1 rounded-full
+                  bg-linear-to-br from-blue-400 to-indigo-600
+                  shadow-lg shadow-blue-500/20">
                   <img
-                    className=" h-28 w-28 object-cover  mx-auto rounded-[50%]"
+                    className="h-24 w-24 rounded-full object-cover
+                      border-4 border-slate-900 transition-transform
+                      duration-200 group-hover:scale-105"
                     src={(image && URL.createObjectURL(image)) || blankprofile}
                   />
-                </FieldLabel>
-                <Input
-                  type={"file"}
-                  id={"input-profile-photo"}
-                  accept={".jpg, .jpeg, .png"}
-                  onChange={setFile}
-                  className={"hidden"}
-                />
-              </Field>
-              <Field data-invalid={showError.username && errors.username}>
-                <Input
-                  placeholder={"Enter username"}
-                  type={"text"}
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                    setShowError((obj) => ({ ...obj, username: false }));
-                  }}
-                  required
-                />
-                {showError.username && errors.username && (
-                  <FieldError className={"ms-2"}>
-                    Enter a valid username
-                  </FieldError>
-                )}
-              </Field>
-              <Field data-invalid={showError.email && errors.email}>
-                <Input
-                  placeholder={"Enter email-id"}
-                  type={"email"}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setShowError((obj) => ({ ...obj, email: false }));
-                  }}
-                  value={email}
-                  required
-                />
-                {showError.email && errors.email && (
-                  <FieldError className={"ms-2"}>
-                    Enter a valid email address.
-                  </FieldError>
-                )}
-              </Field>
+                  <span className="absolute bottom-0 right-0 flex h-8 w-8
+                    items-center justify-center rounded-full border-2
+                    border-slate-900 bg-blue-500 text-white text-lg">
+                    +
+                  </span>
+                </div>
+                <p className="mt-2 text-center text-xs text-slate-400">
+                  Add profile photo
+                </p>
+              </FieldLabel>
 
-              <Field data-invalid={showError.password && errors.password}>
-                <Input
-                  placeholder={"Enter password"}
-                  type={"password"}
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setShowError((obj) => ({ ...obj, password: false }));
-                  }}
-                  required
-                />
-                {showError.password && errors.password && (
-                  <FieldError className={"ms-2"}>
-                    Enter a valid strong password.
-                  </FieldError>
-                )}
-              </Field>
-              <Button className={"w-1/2 mx-auto mt-5"} type={"submit"}>
-                Sign up
-              </Button>
-            </div>
-          </form>
-        )}
+              <Input
+                type={"file"}
+                id={"input-profile-photo"}
+                accept={".jpg, .jpeg, .png"}
+                onChange={setFile}
+                className={"hidden"}
+              />
+            </Field>
 
-        <Button
-          onClick={() => useLogin(!Login)}
-          children={Login ? "Register as a new user" : "Login"}
-          className={"bg-blue-400 hover:bg-blue-600 mx-auto w-full "}
-        />
+            <Field data-invalid={showError.username && errors.username}>
+              <Input
+                placeholder={"Enter username"}
+                type={"text"}
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  setShowError((obj) => ({ ...obj, username: false }));
+                }}
+                required
+                className="h-11 rounded-xl border border-white/10
+                  bg-slate-950/40 px-4 text-white placeholder:text-slate-500
+                  focus-visible:ring-2 focus-visible:ring-blue-500/70
+                  focus-visible:border-blue-500/50 transition-all"
+              />
+              {showError.username && errors.username && (
+                <FieldError className={"ms-2"}>
+                  Enter a valid username
+                </FieldError>
+              )}
+            </Field>
+
+            <Field data-invalid={showError.email && errors.email}>
+              <Input
+                placeholder={"Enter email-id"}
+                type={"email"}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setShowError((obj) => ({ ...obj, email: false }));
+                }}
+                value={email}
+                required
+                className="h-11 rounded-xl border border-white/10
+                  bg-slate-950/40 px-4 text-white placeholder:text-slate-500
+                  focus-visible:ring-2 focus-visible:ring-blue-500/70
+                  focus-visible:border-blue-500/50 transition-all"
+              />
+              {showError.email && errors.email && (
+                <FieldError className={"ms-2"}>
+                  Enter a valid email address.
+                </FieldError>
+              )}
+            </Field>
+
+            <Field data-invalid={showError.password && errors.password}>
+              <Input
+                placeholder={"Enter password"}
+                type={"password"}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setShowError((obj) => ({ ...obj, password: false }));
+                }}
+                required
+                className="h-11 rounded-xl border border-white/10
+                  bg-slate-950/40 px-4 text-white placeholder:text-slate-500
+                  focus-visible:ring-2 focus-visible:ring-blue-500/70
+                  focus-visible:border-blue-500/50 transition-all"
+              />
+              {showError.password && errors.password && (
+                <FieldError className={"ms-2"}>
+                  Enter a valid strong password.
+                </FieldError>
+              )}
+            </Field>
+
+            <Button
+              className="w-full h-12 mt-2 rounded-xl font-semibold text-white
+                bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/20
+                hover:shadow-blue-500/30 hover:-translate-y-0.5
+                transition-all duration-200"
+              type={"submit"}
+            >
+              Sign up
+            </Button>
+          </div>
+        </form>
+      )}
+
+      <div className="relative z-10 flex items-center gap-3">
+        <div className="h-px flex-1 bg-white/10" />
+        <span className="text-xs text-slate-500">OR</span>
+        <div className="h-px flex-1 bg-white/10" />
       </div>
-    </div>
-  );
-};
 
-export default Auth;
+      <Button
+        onClick={() => useLogin(!Login)}
+        children={Login ? "Create a new account" : "Back to login"}
+        className="relative z-10 w-full h-11 mx-auto rounded-xl
+          border border-white/10 bg-white/5 hover:bg-white/10
+          text-slate-200 hover:text-white font-medium
+          transition-all duration-200"
+      />
+    </div>
+  </div>
+)
+}
+export default Auth
