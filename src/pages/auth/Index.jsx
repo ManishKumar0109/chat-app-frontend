@@ -187,7 +187,7 @@ const Auth = () => {
         <form className="relative z-10" onSubmit={handlesignup}>
           <div className="w-full flex flex-col gap-4">
 
-            <Field className={"flex items-center justify-center"}>
+            {/* <Field className={"flex items-center justify-center"}>
               <FieldLabel
                 htmlFor="input-profile-photo"
                 className="group cursor-pointer"
@@ -219,7 +219,7 @@ const Auth = () => {
                 onChange={setFile}
                 className={"hidden"}
               />
-            </Field>
+            </Field> */}
 
             <Field data-invalid={showError.username && errors.username}>
               <Input
