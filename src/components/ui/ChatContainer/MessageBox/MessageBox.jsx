@@ -1,5 +1,3 @@
-
-
 import { useEffect, useRef } from "react";
 import { useStore } from "../../../../../store";
 import dayjs from "dayjs";
@@ -38,8 +36,7 @@ const MessageBox = () => {
 
     if (
       selectedChatData?._id &&
-      (selectedChatType === "contact" ||
-        selectedChatType === "channel")
+      (selectedChatType === "contact" || selectedChatType === "channel")
     ) {
       fetchMessages();
     }
@@ -78,7 +75,7 @@ const MessageBox = () => {
       <img
         src={message.fileUrl.replace(
           "/upload/",
-          "/upload/q_auto,f_auto,w_600/"
+          "/upload/q_auto,f_auto,w_600/",
         )}
         alt="shared"
         loading="lazy"
@@ -134,11 +131,7 @@ const MessageBox = () => {
       className={`
         flex items-center gap-3 p-3 rounded-2xl
         transition-all max-w-sm
-        ${
-          isSender
-            ? "bg-violet-600 text-white"
-            : "bg-zinc-700 text-zinc-100"
-        }
+        ${isSender ? "bg-violet-600 text-white" : "bg-zinc-700 text-zinc-100"}
       `}
     >
       <div className="text-2xl">📄</div>
@@ -172,21 +165,16 @@ const MessageBox = () => {
     const currentUserId = userInfo?._id?.toString();
 
     // FIX: sender can be either an ID or a populated user object.
-    const senderId = (
-      message.sender?._id ?? message.sender
-    )?.toString();
+    const senderId = (message.sender?._id ?? message.sender)?.toString();
 
-    const isSender =
-      Boolean(currentUserId) && senderId === currentUserId;
+    const isSender = Boolean(currentUserId) && senderId === currentUserId;
 
     const fileType = getMessageType(message);
 
     return (
       <div
         key={message._id}
-        className={`flex mb-5 ${
-          isSender ? "justify-end" : "justify-start"
-        }`}
+        className={`flex mb-5 ${isSender ? "justify-end" : "justify-start"}`}
       >
         {/* RECEIVER AVATAR IN CHANNELS */}
         {!isSender && selectedChatType === "channel" && (
@@ -250,10 +238,7 @@ const MessageBox = () => {
       lastDate = messageDate;
 
       return (
-        <div
-          key={message._id || `${messageDate}-${index}`}
-          className="w-full"
-        >
+        <div key={message._id || `${messageDate}-${index}`} className="w-full">
           {showDate && (
             <div className="flex justify-center my-4">
               <span className="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full border border-gray-600">
