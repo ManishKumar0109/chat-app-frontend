@@ -17,8 +17,9 @@ const Protected = () => {
           
         }
       } catch (err) {
+        console.log(err.response , err)
         if (!err.response) {
-          navigate('/coldstart')
+          return navigate('/coldstart')
         }
         return navigate("/auth");
       }
@@ -30,7 +31,7 @@ const Protected = () => {
   },[]) 
 
   if(!userInfo){
-    <div>Loading....</div>
+    return(<div>Loading....</div>)
   }
 
   return (
